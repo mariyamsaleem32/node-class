@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <form onsubmit="getWeather(); return false">
+        <label for="cityName">City Name: <input type="text" id="cityName"></label> <br><br>
+        <button type="submit">Get weather</button>
+    </form>
+    <div id="result">
+        <!-- Weather data will be displayed here -->
+    </div>
+
+    <script type="module">
+      window.getWeather = function(){
+            let cityName = document.getElementById('cityName').value;
+            fetch(`http://localhost:3000/weather/${cityName}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                <h2>${data.city}</h2>
+                <p>Temperature: ${data.tempInC}°C</p>
+                <p>Humidity: ${data.humidity}%</p>
+                <p>High: ${data.high}°C</p>
+                <p>Low: ${data.low}°C</p>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error); 
+                let resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                <h2>Error</h2>
+                <p>City ${cityName} not found</p>
+                `
+            });
+        }
+    </script>
+</body>
+</html>
