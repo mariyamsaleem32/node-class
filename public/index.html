@@ -18,7 +18,7 @@
     <script type="module">
       window.getWeather = function(){
             let cityName = document.getElementById('cityName').value;
-            fetch(`http://localhost:3000/weather/${cityName}`)
+            fetch(`/${cityName}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

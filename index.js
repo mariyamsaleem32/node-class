@@ -1,15 +1,16 @@
 import express from 'express';
-import cors from 'cors'
+import path from 'path';
+// import cors from 'cors';
 const app = express()
-app.use(cors())
-
+// app.use(cors())
+const _dirname = path.resolve();
 const port = process.env.PORT || 3000
 
-app.get('/',(req, res) =>{
-    res.send('Hello World!'+ new Date().toLocaleString())
-    })
+// app.get('/',(req, res) =>{
+//     res.send('Hello World!'+ new Date().toLocaleString())
+//     })
 
-    app.get('/weather/:cityName', (req, res) => {
+    app.get('/:cityName', (req, res) => {
         let weatherData ={
           karachi:{
             city :"karachi",
@@ -41,6 +42,9 @@ app.get('/',(req, res) =>{
           res.status(404).send(`Data for ${req.params.cityName} not found`);
         }
       })
+
+      app.use(express.static(path.join(_dirname,'public'))
+      )
 
       app.listen(port,() =>{
         console.log(`server is running on ${port}`);
