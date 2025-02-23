@@ -1,10 +1,10 @@
 import React from 'react';
-import './app.css'
+import WeatherApp from './components/weather';
 
 const App = () => {
   return (
     <>
-    <h1>hello world</h1>
+    <WeatherApp/>
     </>
   );
 }
