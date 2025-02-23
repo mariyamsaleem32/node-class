@@ -7,7 +7,7 @@ function WeatherApp() {
 
   const getWeather = (event) => {
     event.preventDefault();
-    fetch(`/weather${cityName}`)
+    fetch(`/${cityName}`)
       .then(response => response.json())
       .then(data => {
         setWeatherData(data);
