@@ -1,21 +1,29 @@
 import express from 'express';
-import path from 'path';
 // import cors from 'cors';
+// import path from 'path';
 const port = process.env.PORT || 3000
 const app = express()
 // app.use(cors())
-const _dirname = path.resolve();
+// const _dirname = path.resolve();
+app.use(express.json())
 
 app.get('/',(req, res) =>{
-  res.send('I am using express js!')
+  res.send('I am using express js' + new Date().toLocaleString())
+})
+ 
+const users = [];
+app.get('/user',(req, res) =>{
+  res.send({
+  user:users
+  })
 })
 
-app.get('/posts',(req, res) =>{
+app.post('/user',(req,res) =>{
+ users.push(req.body);
     res.send({
-      title:'Hello World!',
-      Date : new Date().toLocaleString()
+      message:'user added sucsessfully'
     })
-  })
+})
 
     // app.get('/:cityName', (req, res) => {
     //     let weatherData ={
