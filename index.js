@@ -6,10 +6,6 @@ const app = express()
 // app.use(cors())
 const _dirname = path.resolve();
 app.use(express.json())
-
-// app.get('/',(req, res) =>{
-//   res.send('I am using express js' + new Date().toLocaleString())
-// })
  
 const users = [];
 app.get('/user',(req, res) =>{
@@ -19,8 +15,9 @@ app.get('/user',(req, res) =>{
 })
 
 app.post('/user',(req,res) =>{
- users.push(req.body);
+ users.push({...req.body, id: users.lenght + 1});
     res.send({
+      user : req.body,
       message:'user added sucsessfully'
     })
 })
