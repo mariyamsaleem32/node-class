@@ -1,23 +1,28 @@
 import { useState } from 'react';
-import '../index.css'
-function WeatherApp() {
+import '../index.css';
+import axios from 'axios';
+
+const  WeatherApp = () => {
   const [cityName, setCityName] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState('');
 
-  const getWeather = (event) => {
+  const getWeather = async (event) => {
     event.preventDefault();
-    fetch(`/${cityName}`)
-      .then(response => response.json())
-      .then(data => {
+    try {
+    const url = axios.get(`/${cityName}`);
+    const data = await url;
+    console.log('data',data);
+    
+      // .then(response => response.json())
+      // .then(data => {
         setWeatherData(data);
         setError('');
-      })
-      .catch(error => {
-        console.error('Error:', error);
+     } catch (error) {
+        console.log('Error:', error.message);
         setWeatherData(null);
         setError(`City ${cityName} not found`);
-      });
+      };
   };
 
   return (
