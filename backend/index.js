@@ -37,6 +37,21 @@ app.delete('/user/:id',(req, res) =>{
   res.send('user deleted sucsessfully')
 })
 
+app.put('/user/:id', (req, res) => {
+  const { id } = req.params;
+  console.log("id", id);
+  const index = users.findIndex(obj => obj.id === Number(id));
+  if (index === -1) {
+    return res.status(404).send({ message: 'User not found' });
+  }
+  users[index] = {
+    ...users[index],
+    ...req.body,    
+  };
+  res.send({ message: 'User updated successfully', user: users[index] });
+});
+
+
 const weatherData = {
     karachi: {
       city: 'karachi',
