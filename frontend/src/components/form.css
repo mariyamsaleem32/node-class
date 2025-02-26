@@ -1,0 +1,77 @@
+/* AppForm.css */
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7fc;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+  }
+  
+  .app-form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .app-form .ant-form-item-label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .app-input {
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .app-input:focus {
+    border-color: #40a9ff;
+    box-shadow: 0 0 5px rgba(64, 169, 255, 0.2);
+  }
+  
+  .submit-button-container {
+    text-align: center;
+  }
+  
+  .submit-button {
+    background-color: #1890ff;
+    border-color: #1890ff;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .submit-button:hover {
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+  }
+  
+  .display-area {
+    background-color: #f0f4f7;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .display-area p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .user-message {
+    text-align: center;
+    color: #f5222d;
+    font-weight: bold;
+  }
+  

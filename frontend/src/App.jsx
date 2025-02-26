@@ -1,9 +1,12 @@
 import React from 'react';
-import WeatherApp from './components/weather';
+// import WeatherApp from './components/weather';
+import AppForm from './components/form';
+
 const App = () => {
   return (
     <div>
-      <WeatherApp/>
+      {/* <WeatherApp/> */}
+      <AppForm/>
     </div>
   );
 }

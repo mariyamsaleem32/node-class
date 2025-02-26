@@ -13,18 +13,29 @@ app.get('/',(req,res) => {
     res.send('the currunt date on server is :'+ date.toDateString())
 })
  
+ 
 const users = [];
+app.post('/user',(req,res) =>{
+  users.push({...req.body,id:users.length + 1});
+     res.send({
+       user: req.body,
+       message:'user added sucsessfully'
+     })
+ })
+
 app.get('/user',(req, res) =>{
   res.send({
-  users:users
+  users:users,
   })
 })
 
-app.post('/user',(req,res) =>{
- users.push(req.body);
-    res.send({
-      message:'user added sucsessfully'
-    })
+app.delete('/user/:id',(req, res) =>{
+  const {id} = req.params;
+  console.log("id",id);
+  
+  res.send({
+  users:users,
+  })
 })
 
 const weatherData = {
