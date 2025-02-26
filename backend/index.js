@@ -31,11 +31,10 @@ app.get('/user',(req, res) =>{
 
 app.delete('/user/:id',(req, res) =>{
   const {id} = req.params;
-  console.log("id",id);
-  
-  res.send({
-  users:users,
-  })
+  console.log("id",req.params);
+  const index = users.findIndex(obj => obj.id === Number(id))
+  users.splice(index,1)
+  res.send('user deleted sucsessfully')
 })
 
 const weatherData = {
