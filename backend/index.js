@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import { menuClasses } from '@mui/material';
+import schema from './schema/index';
+
 // import path from 'path';
 // const port = process.env.PORT || 3000
 const port = 3000
@@ -10,8 +11,18 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/',(req,res) => {
+  try{
     const date = new Date()
-    res.send('the currunt date on server is :'+ date.toDateString())
+    res.status(200).send({
+      status:200,
+      message:'the currunt date on server is :'+ date.toDateString()
+  })
+  }catch(error){
+    res.status(400).send({
+      status:400,
+      message:'something went wrong'
+    }) 
+  }
 })
  
  
