@@ -1,12 +1,12 @@
 import express from "express";
-import cors from 'cors';
+// import cors from 'cors';  //for connection with frontend
 import router from './routes/index.js';
 import mongoose from "./db/index.js";
-// import schema from "./schema/index.js";
+// import schema from "./schema/index.js"; //joi for validation
 
 const port = 3000
 const app = express()
-app.use(cors())
+// app.use(cors())
 app.use(express.json());
 
 mongoose.connection.on("open", () => {
