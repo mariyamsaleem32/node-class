@@ -26,6 +26,3 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api',router);
-
-
-
