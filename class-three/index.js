@@ -13,10 +13,6 @@ mongoose.connection.on("error", (err) => {
   console.log("Error in connecting MongoDB",err);
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on ${port}`);
-});
-
 app.get('/', (req, res) => {
   const date = new Date();
   res.status(200).send({
@@ -26,3 +22,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api',router);
+
+app.listen(port, () => {
+  console.log(`Server is running on ${port}`);
+});
