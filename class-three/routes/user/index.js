@@ -1,13 +1,10 @@
 import express from 'express';
-import postUser from './post.js';
-import getUser from './get.js';
-import deleteUser from './delete.js';
-import updateUser from './update.js';
+import {postUser,getUser,deleteUser,updateUser} from './user.js';
 
-const router = express.Router();
-router.post('/',postUser);
-router.get('/',getUser)
-router.delete('/:id',deleteUser)
-router.put('/:id',updateUser)
+const user_router = express.Router();
+user_router.post('/',postUser);
+user_router.get('/',getUser)
+user_router.delete('/:id',deleteUser)
+user_router.put('/:id',updateUser)
 
-export default router;
+export default user_router;
