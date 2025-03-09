@@ -1,6 +1,7 @@
-import { message } from 'antd';
 import User from '../../models/user/index.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 // post user
     const postUser = async (req,res) => {
@@ -11,11 +12,9 @@ import bcrypt from 'bcrypt';
             password
         });
         const data = user.toObject();
+        var token = jwt.sign({ email: user.email }, process.env.JWT_SCRET);
         delete data.password;
-        res.status(201).send({
-            status:201,
-            user: data
-        })
+        res.status(201).send({ status:201,user: data,token})
     }catch(err){
         res.status(400).send({
             status:400,
@@ -27,20 +26,37 @@ import bcrypt from 'bcrypt';
     const getUser = async(req, res) => {
         try{  
             const users = await User.find();
-            res.status(200).send({status: 200,user});
+            res.status(200).send({status: 200,users});
         }catch(err){
             res.status(400).send({status: 400,err})
         }};
 
-    // login user
-    const loginUser = async(req, res) => {
+// delete user
+const deleteUser = async(req, res) => {
+    try {
+    const {id} = req.params;
+    await User.findByIdAndDelete(id)
+  res.status(200).send({
+    status: 200,
+    message:'user deleted succesfully',
+    });
+    } catch (err) {
+    res.status(400).send({
+        status: 400,
+        err  
+    })
+}};
+
+ // login user
+ const loginUser = async(req, res) => {
     try{  
         const {email,password} = req.body;
         const user = await User.findOne({email});
         if(user){
         const checkPassword = bcrypt.compareSync(password,user.password);
         if(checkPassword){
-        res.status(200).send({status: 200,message:'user login successfully',user});
+        var token = jwt.sign({ email: user.email }, process.env.JWT_SCRET);
+        res.status(200).send({status: 200,message:'user login successfully',user,token});
         }else{
         res.status(401).send({status: 401,message:'incorrect password'})}
         }else{
@@ -65,20 +81,5 @@ import bcrypt from 'bcrypt';
                 })
         }}
 
-// delete user
-const deleteUser = async(req, res) => {
-    try {
-    const {id} = req.params;
-    await User.findByIdAndDelete(id)
-  res.status(200).send({
-    status: 200,
-    message:'user deleted succesfully',
-    });
-    } catch (err) {
-    res.status(400).send({
-        status: 400,
-        err  
-    })
-}};
 
 export {postUser,getUser,loginUser,deleteUser,updateUser};
